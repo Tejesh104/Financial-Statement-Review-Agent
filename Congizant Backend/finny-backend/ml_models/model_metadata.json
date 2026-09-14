@@ -1,0 +1,31 @@
+{
+  "model_type": "IsolationForest",
+  "algorithm": "sklearn.ensemble.IsolationForest",
+  "sklearn_version": "1.8.0",
+  "joblib_version": "1.5.3",
+  "training_dataset": "Financial Statements.csv",
+  "training_timestamp": "2026-09-13T11:04:03.394395+00:00",
+  "random_state": 42,
+  "contamination": "auto",
+  "n_estimators": 100,
+  "feature_names": [
+    "current_ratio",
+    "debt_to_equity",
+    "roe",
+    "roa",
+    "net_profit_margin",
+    "gross_profit_margin"
+  ],
+  "feature_count": 6,
+  "training_rows": 161,
+  "normal_count": 139,
+  "anomaly_count": 22,
+  "anomaly_percentage": 13.6646,
+  "score_distribution": {
+    "min": -0.16732999413906702,
+    "max": 0.14630109176503403,
+    "mean": 0.07955818890101893,
+    "std": 0.06553966358676626
+  },
+  "interpretation_note": "Unsupervised anomaly detection: observations with score < 0 (label -1) are statistically unusual relative to the training distribution, not confirmed fraud or errors."
+}

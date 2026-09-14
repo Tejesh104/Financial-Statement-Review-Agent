@@ -1,0 +1,1691 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #070B14;
+    color: #F1F5F9;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* Custom scrollbar for analytics tables & code logs */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B1120;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Background grid utility - lines removed as requested */
+.bg-grid-pattern {
+  background-image: none !important;
+}
+
+/* Authenticated pages share Finny's spatial atmosphere through inexpensive CSS
+   layers, keeping the landing page's existing Three.js scene unchanged. */
+.finny-app-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 68% 38%, rgba(83, 62, 190, 0.16), transparent 25%),
+    radial-gradient(circle at 18% 82%, rgba(0, 166, 214, 0.09), transparent 24%),
+    #020308;
+}
+
+.finny-app-stars {
+  position: absolute;
+  inset: -35%;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle, rgba(190, 184, 255, 0.8) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(0, 229, 255, 0.55) 0 1px, transparent 1.5px);
+  background-size: 137px 151px, 223px 197px;
+  animation: finnyStarsDrift 19s linear infinite;
+}
+
+.finny-app-stars-secondary {
+  opacity: 0.22;
+  transform: scale(1.2);
+  background-size: 181px 173px, 271px 239px;
+  animation-duration: 31s;
+  animation-direction: reverse;
+}
+
+.finny-app-orb {
+  position: absolute;
+  width: min(42vw, 520px);
+  aspect-ratio: 1;
+  left: 58%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, rgba(217, 211, 255, 0.32), rgba(102, 80, 255, 0.18) 22%, transparent 68%);
+  filter: blur(24px);
+  opacity: 0.7;
+  animation: finnyAppOrbPulse 4s ease-in-out infinite;
+}
+
+@keyframes finnyStarsDrift {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(4%, 3%, 0) rotate(3deg); }
+}
+
+@keyframes finnyAppOrbPulse {
+  0%, 100% { opacity: 0.52; transform: translate(-50%, -50%) scale(0.92); }
+  50% { opacity: 0.82; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.finny-assistant-panel {
+  width: min(420px, calc(100vw - 2rem));
+}
+
+@media (max-width: 640px) {
+  .finny-assistant {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .finny-assistant-panel {
+    height: min(520px, calc(100vh - 7rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .finny-app-stars,
+  .finny-app-orb {
+    animation: none;
+  }
+}
+
+.fintech-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%);
+  border: 1px solid rgba(51, 65, 85, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 0.75rem;
+}
+
+.fintech-card-glow {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 25px -5px rgba(0, 229, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 0.75rem;
+}
+
+.scanline {
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(0, 229, 255, 0.08) 51%,
+      transparent 52%);
+  background-size: 100% 4px;
+}
+
+/* Fade-in with subtle scale animation */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Laser scan line animation for financial document verification */
+@keyframes laserScan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-laser-scan {
+  animation: laserScan 2.5s ease-in-out infinite;
+}
+
+/* Floating ambient orbs */
+@keyframes floatOrb1 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+}
+
+@keyframes floatOrb2 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-25px, 25px) scale(1.08);
+  }
+}
+
+.animate-float-1 {
+  animation: floatOrb1 8s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatOrb2 10s ease-in-out infinite;
+}
+
+/* Radar pulse animation */
+@keyframes radarRing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.animate-radar-ring {
+  animation: radarRing 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Pulse glow border */
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    border-color: rgba(0, 229, 255, 0.25);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+  }
+
+  50% {
+    border-color: rgba(0, 229, 255, 0.6);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+  }
+}
+
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* =========================================================
+   FINNY 3D AGENT LANDING STYLES
+   ========================================================= */
+
+.ambient-glow {
+  position: fixed;
+  width: 650px;
+  height: 650px;
+  left: 50%;
+  top: 43%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(115, 80, 255, 0.13), transparent 65%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 1;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+}
+
+.finny-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.logo-symbol {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.status {
+  font-size: 10px;
+  letter-spacing: 2px;
+  opacity: 0.65;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 20px rgba(255, 255, 255, 0.7);
+  animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.finny-main {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8vw;
+  margin-top: -100px;
+}
+
+.brand-word {
+  font-size: clamp(55px, 9vw, 145px);
+  font-weight: 800;
+  letter-spacing: -5px;
+  line-height: 1;
+  opacity: 0;
+  animation: brandAppear 1.5s ease forwards;
+}
+
+.left { animation-delay: 0.3s; }
+.right { animation-delay: 0.5s; }
+
+@keyframes brandAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(15px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.ai-core {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.core {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #b7a8ff 15%, #6650ff 45%, #17102f 75%);
+  box-shadow: 0 0 25px rgba(130, 105, 255, 0.9), 0 0 70px rgba(100, 70, 255, 0.6), 0 0 150px rgba(80, 60, 255, 0.3);
+  animation: coreFloat 4s ease-in-out infinite;
+  z-index: 4;
+}
+
+.core span {
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 0 10px white, 0 0 25px #a99aff;
+}
+
+@keyframes coreFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.08); }
+}
+
+.core-glow {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(130, 100, 255, 0.5), transparent 65%);
+  filter: blur(15px);
+  animation: glowPulse 3s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(160, 140, 255, 0.22);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.orbit-1 {
+  width: 170px;
+  height: 70px;
+  animation: orbitOne 6s linear infinite;
+}
+
+.orbit-2 {
+  width: 210px;
+  height: 95px;
+  animation: orbitTwo 9s linear infinite reverse;
+}
+
+@keyframes orbitOne {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitTwo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.intro {
+  width: min(600px, 90%);
+  text-align: center;
+  margin-top: 55px;
+  animation: introAppear 1.5s ease 0.8s both;
+}
+
+@keyframes introAppear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+
+.finny-h1 {
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.finny-h1 span {
+  display: block;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff, #aaa0ff, #ffffff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove {
+  from { background-position: 0%; }
+  to { background-position: 200%; }
+}
+
+.description {
+  margin: 20px auto 28px;
+  max-width: 470px;
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.5;
+}
+
+.finny-start-btn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 100px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.finny-start-btn span {
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.finny-start-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 30px rgba(130, 110, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.finny-start-btn:hover span {
+  transform: translateX(5px);
+}
+
+.bottom-text {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  letter-spacing: 4px;
+  opacity: 0.25;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .brand { gap: 20px; }
+  .brand-word { font-size: 45px; letter-spacing: -2px; }
+  .ai-core { width: 120px; height: 120px; }
+  .core { width: 55px; height: 55px; }
+  .orbit-1 { width: 130px; }
+  .orbit-2 { width: 150px; }
+  .finny-header { padding: 20px; }
+}
+
+/* =========================================================
+   FINNY AI CORE — GUIDE PAGE VISUAL
+   Animated orbiting-ring + glowing sphere for /guide
+   ========================================================= */
+
+/* Container for the entire AI core assembly */
+.finny-ai-core {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease-out;
+}
+
+/* Glowing sphere in the center */
+.finny-core {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #b7a8ff 15%, #6650ff 45%, #17102f 75%);
+  box-shadow: 0 0 25px rgba(130, 105, 255, 0.9), 0 0 70px rgba(100, 70, 255, 0.6), 0 0 150px rgba(80, 60, 255, 0.3);
+  animation: finnyCoreFloat 4s ease-in-out infinite;
+  z-index: 4;
+}
+
+.finny-core span {
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 0 10px white, 0 0 25px #a99aff;
+}
+
+@keyframes finnyCoreFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.08); }
+}
+
+/* Radial glow behind the core sphere */
+.finny-core-glow {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(130, 100, 255, 0.5), transparent 65%);
+  filter: blur(15px);
+  animation: finnyGlowPulse 3s infinite;
+}
+
+@keyframes finnyGlowPulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* Orbit rings around the core */
+.finny-orbit {
+  position: absolute;
+  border: 1px solid rgba(160, 140, 255, 0.22);
+  border-radius: 50%;
+}
+
+.finny-orbit-1 {
+  width: 180px;
+  height: 75px;
+  animation: finnyOrbitOne 6s linear infinite;
+}
+
+.finny-orbit-2 {
+  width: 220px;
+  height: 100px;
+  animation: finnyOrbitTwo 9s linear infinite reverse;
+}
+
+@keyframes finnyOrbitOne {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes finnyOrbitTwo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Ambient background glow that breathes */
+.finny-ambient-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(115, 80, 255, 0.15), transparent 65%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+  animation: finnyBreathe 5s ease-in-out infinite;
+}
+
+@keyframes finnyBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+/* Entrance animation for the core assembly */
+.finny-core-appear {
+  animation: finnyCoreAppear 1.2s ease forwards;
+}
+
+@keyframes finnyCoreAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.8);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Responsive scaling for the guide page AI core */
+@media (max-width: 800px) {
+  .finny-ai-core { width: 160px; height: 160px; }
+  .finny-core { width: 55px; height: 55px; }
+  .finny-core-glow { width: 110px; height: 110px; }
+  .finny-orbit-1 { width: 140px; height: 55px; }
+  .finny-orbit-2 { width: 165px; height: 75px; }
+  .finny-ambient-glow { width: 250px; height: 250px; }
+}
+
+/* ==========================================================================
+   9 UNIQUE REVIEW STAGE ANIMATIONS
+   Each stage in the 9-stage review pipeline features a distinct animation profile.
+   ========================================================================== */
+
+/* Stage 1: Document Verification - Radar Beam sweep */
+.radar-beam {
+  position: relative;
+  overflow: hidden;
+}
+.radar-beam::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(6, 182, 212, 0.4) 60deg, transparent 90deg);
+  animation: radarBeamRotate 3s linear infinite;
+  pointer-events: none;
+}
+@keyframes radarBeamRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Stage 2: Data Extraction - Matrix vertical flow scan */
+.matrix-flow {
+  position: relative;
+}
+.matrix-flow::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #60a5fa, #93c5fd, transparent);
+  box-shadow: 0 0 8px #3b82f6;
+  animation: matrixScanLine 2s ease-in-out infinite alternate;
+}
+@keyframes matrixScanLine {
+  0% { top: 0%; opacity: 0.3; }
+  100% { top: 95%; opacity: 1; }
+}
+
+/* Stage 3: Validator / Critic Layer - Critic corner lock */
+.critic-lock {
+  animation: criticLockPulse 2.4s ease-in-out infinite;
+}
+@keyframes criticLockPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  50% { transform: scale(1.02); box-shadow: 0 0 14px 2px rgba(99, 102, 241, 0.35); }
+}
+
+/* Stage 4: Financial Validation - Calculator arithmetic pulse */
+.calc-pulse {
+  animation: calcMathPulse 1.8s ease-in-out infinite;
+}
+@keyframes calcMathPulse {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.85)); }
+}
+
+/* Stage 5: Previous-Year Comparison - YoY sinusoidal wave */
+.yoy-wave {
+  animation: yoyWaveDrift 3s ease-in-out infinite;
+}
+@keyframes yoyWaveDrift {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(3px) scale(1.01); }
+  75% { transform: translateX(-3px) scale(0.99); }
+}
+
+/* Stage 6: Cross-Statement Consistency - Reconcile Dual Spin */
+.reconcile-spin {
+  position: relative;
+}
+.reconcile-spin::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 1.5px dashed rgba(20, 184, 166, 0.6);
+  animation: reconcileSpinCycle 6s linear infinite;
+}
+@keyframes reconcileSpinCycle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Stage 7: Variance Analysis - Equalizer dynamic jump */
+.equalizer-jump {
+  animation: equalizerJumpPulse 1.4s ease-in-out infinite alternate;
+}
+@keyframes equalizerJumpPulse {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(1px); }
+}
+
+/* Stage 8: Anomaly & Risk Detection - Sonar Ping */
+.sonar-ping {
+  position: relative;
+}
+.sonar-ping::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1px solid rgba(244, 63, 94, 0.7);
+  animation: sonarPingRings 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes sonarPingRings {
+  0% { transform: scale(0.95); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+/* Stage 9: Audit Summary Synthesis - Golden Crystallize Glow */
+.golden-crystallize {
+  animation: goldCrystalShimmer 3s ease-in-out infinite;
+}
+@keyframes goldCrystalShimmer {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.4)); }
+  50% { filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.85)); }
+}
+
+/* ==========================================================================
+   6 UNIQUE RISK & INTEGRITY VECTOR ANIMATIONS
+   Each screened vector on the Verification / Risk Analysis page has its own visual rhythm.
+   ========================================================================== */
+
+/* Vector 1: Binary Hash & File Integrity - Pulse Scan */
+.pulse-scan {
+  animation: vectorPulseScan 2s ease-in-out infinite;
+}
+@keyframes vectorPulseScan {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.7)); }
+}
+
+/* Vector 2: Document Schema & Tabular Geometry - Grid Shimmer */
+.grid-shimmer {
+  background-size: 200% 200%;
+  animation: vectorGridShimmer 3.5s ease infinite;
+}
+@keyframes vectorGridShimmer {
+  0% { filter: brightness(0.95) saturate(1); }
+  50% { filter: brightness(1.25) saturate(1.3); }
+  100% { filter: brightness(0.95) saturate(1); }
+}
+
+/* Vector 3: Metadata & Timestamps - Clock Radar Sweep */
+.radar-clock {
+  animation: vectorClockTick 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes vectorClockTick {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Vector 4: Financial Statements Schedule - Bar Wave */
+.bar-wave {
+  animation: vectorBarWave 1.6s ease-in-out infinite alternate;
+}
+@keyframes vectorBarWave {
+  0% { transform: scaleY(0.9); }
+  100% { transform: scaleY(1.12); }
+}
+
+/* Vector 5: Cryptographic Duplicate Sentinel - Ripple Ping */
+.ripple-ping {
+  animation: vectorRipplePing 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+@keyframes vectorRipplePing {
+  0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(168, 85, 247, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+/* Vector 6: Forensic Tampering & Artifact Detection - Sonar Shield */
+.sonar-shield {
+  animation: vectorSonarShield 2.8s ease-in-out infinite;
+}
+@keyframes vectorSonarShield {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(20, 184, 166, 0.4)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.8)); transform: scale(1.05); }
+}
+
+/* ==========================================================================
+   FINNY Light Theme: Ethereal Periwinkle & Radiant Lavender Color System
+   ========================================================================== */
+
+html.light {
+  color-scheme: light;
+}
+
+/* 1. Main Application Background (Periwinkle Glow) */
+html.light body {
+  background-color: #B4BFF8 !important;
+  color: #13142B !important;
+}
+
+/* Background canvas with soft periwinkle atmosphere and ethereal light streak */
+html.light .finny-app-background {
+  background:
+    radial-gradient(circle at 68% 38%, rgba(255, 255, 255, 0.55), transparent 42%),
+    radial-gradient(circle at 18% 82%, rgba(138, 150, 248, 0.45), transparent 38%),
+    linear-gradient(135deg, #A8B4F8 0%, #C4CCFB 45%, #9AA6F7 100%) !important;
+}
+
+html.light .finny-app-background::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    52deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.22) 48%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.22) 52%,
+    transparent 58%
+  );
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ANIMATION CRITICAL: Stars and Orb retain EXACT SAME animations, speeds & timing */
+html.light .finny-app-stars {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(220, 226, 255, 0.7) 0 1px, transparent 1.5px) !important;
+  opacity: 0.35 !important;
+}
+
+html.light .finny-app-orb {
+  background: radial-gradient(circle at 38% 35%, rgba(255, 255, 255, 0.75), rgba(160, 172, 252, 0.45) 30%, transparent 70%) !important;
+  opacity: 0.85 !important;
+}
+
+html.light .bg-grid-pattern {
+  background-image: none !important;
+}
+
+/* 2. Primary Card Surfaces & Panels (Integrated Frosted Glass) */
+html.light [class*="bg-[#0B1120]"],
+html.light .bg-\[\#0B1120\],
+html.light .bg-\[\#0B1120\]\/95,
+html.light .bg-\[\#0B1120\]\/90,
+html.light .bg-\[\#0B1120\]\/80,
+html.light .bg-\[\#0B1120\]\/70,
+html.light .bg-\[\#0B1120\]\/60,
+html.light .bg-\[\#0B1120\]\/55,
+html.light .bg-\[\#0B1120\]\/50,
+html.light .bg-\[\#0B1120\]\/40,
+html.light .bg-\[\#0B1120\]\/30,
+html.light .bg-\[\#0B1120\]\/20,
+html.light .bg-\[\#0B1120\]\/10,
+html.light [class*="via-[#0B1120]"],
+html.light .bg-gradient-to-r.from-slate-900,
+html.light [class*="from-slate-900/90"],
+html.light .fintech-card,
+html.light .fintech-card-glow {
+  background: rgba(255, 255, 255, 0.68) !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 16px 40px -10px rgba(99, 102, 241, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  color: #0F172A !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* 3. Secondary Surfaces (Clean Sub-Containers & Inset Panels) */
+html.light [class*="bg-[#070B14]"],
+html.light .bg-\[\#070B14\],
+html.light .bg-\[\#070B14\]\/95,
+html.light .bg-\[\#070B14\]\/90,
+html.light .bg-\[\#070B14\]\/80,
+html.light .bg-\[\#070B14\]\/70,
+html.light .bg-\[\#070B14\]\/60,
+html.light .bg-\[\#070B14\]\/50,
+html.light .bg-\[\#070B14\]\/40,
+html.light .bg-\[\#070B14\]\/30,
+html.light .bg-\[\#070B14\]\/20,
+html.light .bg-\[\#070B14\]\/10,
+html.light [class*="bg-slate-900"],
+html.light [class*="bg-slate-950"],
+html.light .bg-slate-900,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-900\/70,
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/50,
+html.light .bg-slate-900\/40,
+html.light .bg-slate-900\/20,
+html.light .bg-slate-950,
+html.light .bg-slate-950\/90,
+html.light .bg-slate-950\/85,
+html.light .bg-slate-950\/60,
+html.light .bg-slate-950\/30,
+html.light .bg-slate-950\/20 {
+  background: rgba(240, 244, 255, 0.65) !important;
+  border-color: rgba(160, 172, 248, 0.35) !important;
+  color: #0F172A !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* 4. Elevated Sub-Controls & Chips */
+html.light [class*="bg-slate-800"],
+html.light .bg-slate-800,
+html.light .bg-slate-800\/90,
+html.light .bg-slate-800\/80,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/50 {
+  background: rgba(230, 236, 255, 0.75) !important;
+  border-color: rgba(160, 172, 248, 0.45) !important;
+  color: #0F172A !important;
+}
+
+/* 5. Borders */
+html.light .border-slate-800,
+html.light .border-slate-800\/90,
+html.light .border-slate-800\/80,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/40,
+html.light .divide-slate-800,
+html.light .divide-slate-800\/80,
+html.light .divide-slate-800\/60 {
+  border-color: rgba(160, 172, 248, 0.35) !important;
+}
+
+html.light .border-slate-700,
+html.light .border-slate-700\/80 {
+  border-color: rgba(160, 172, 248, 0.45) !important;
+}
+
+/* 6. Typography (High Contrast Dark Slate System) */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0F172A !important;
+}
+
+html.light .text-white,
+html.light .text-slate-100 {
+  color: #0F172A !important;
+}
+
+html.light .text-slate-200 {
+  color: #1E293B !important;
+}
+
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-500 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-600 {
+  color: #475569 !important;
+}
+
+/* Preserve crisp white text on buttons & cards with dark/saturated backgrounds */
+html.light button.bg-red-600,
+html.light button.bg-red-600 *,
+html.light button.bg-red-500,
+html.light button.bg-red-500 *,
+html.light .bg-red-600.text-white,
+html.light .bg-blue-600.text-white,
+html.light .bg-indigo-600.text-white,
+html.light .bg-indigo-700.text-white,
+html.light .finny-assistant-panel .bg-gradient-to-r.from-blue-600.to-cyan-600,
+html.light .finny-assistant-panel .bg-gradient-to-r.from-blue-600.to-cyan-600 *,
+html.light [class*="bg-gradient-to-br from-cyan-600 to-indigo-700"],
+html.light [class*="bg-gradient-to-br from-cyan-600 to-indigo-700"] * {
+  color: #FFFFFF !important;
+}
+
+/* 7. Sidebar Navigation (Frosted Glass — Seamless Integration with High Contrast) */
+html.light aside {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-right: 1px solid rgba(160, 172, 248, 0.35) !important;
+  box-shadow: 4px 0 24px rgba(99, 102, 241, 0.06) !important;
+}
+
+html.light aside .h-16.border-b {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-bottom: 1px solid rgba(160, 172, 248, 0.25) !important;
+}
+
+html.light aside h1 {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+
+html.light aside .text-\[10px\].text-slate-400 {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+html.light aside .text-\[11px\].text-slate-400 {
+  color: #1E293B !important;
+  font-weight: 700 !important;
+}
+
+html.light aside a {
+  color: #1E293B !important;
+  font-weight: 600 !important;
+}
+
+html.light aside a svg {
+  color: #334155 !important;
+  stroke: #334155 !important;
+}
+
+html.light aside a:hover {
+  background: rgba(255, 255, 255, 0.6) !important;
+  color: #0F172A !important;
+}
+
+html.light aside a:hover svg {
+  color: #0F172A !important;
+  stroke: #0F172A !important;
+}
+
+html.light aside a.bg-cyan-500\/10,
+html.light aside a.active {
+  background: rgba(238, 242, 255, 0.92) !important;
+  color: #4338CA !important;
+  border: 1px solid #6366F1 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15) !important;
+}
+
+html.light aside a.bg-cyan-500\/10 svg,
+html.light aside a.active svg {
+  color: #4F46E5 !important;
+  stroke: #4F46E5 !important;
+}
+
+html.light aside .bg-cyan-400\/20 {
+  background-color: #EEF2FF !important;
+  color: #4338CA !important;
+  border-color: #C7D2FE !important;
+  font-weight: 700 !important;
+}
+
+html.light aside .border-t {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-top: 1px solid rgba(160, 172, 248, 0.25) !important;
+}
+
+html.light aside .border-t .bg-slate-900\/80 {
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(160, 172, 248, 0.35) !important;
+}
+
+html.light aside .border-t .text-slate-300 {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+}
+
+html.light aside button {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+html.light aside button svg {
+  color: #475569 !important;
+}
+
+html.light aside button:hover {
+  color: #DC2626 !important;
+  background-color: rgba(254, 242, 242, 0.8) !important;
+}
+
+html.light aside button:hover svg {
+  color: #DC2626 !important;
+}
+
+/* 8. TopBar & Breadcrumbs (Frosted Glass — Integrated with Atmosphere) */
+html.light header:not(.finny-header) {
+  background: rgba(255, 255, 255, 0.52) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(160, 172, 248, 0.35) !important;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.05) !important;
+}
+
+html.light header:not(.finny-header) .text-slate-200 {
+  color: #0F172A !important;
+}
+
+html.light header:not(.finny-header) .text-slate-300 {
+  color: #1E293B !important;
+}
+
+html.light header:not(.finny-header) .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.light .h-10.bg-\[\#0B1120\]\/50 {
+  background: rgba(255, 255, 255, 0.32) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(160, 172, 248, 0.25) !important;
+  color: #334155 !important;
+}
+
+html.light .h-10.bg-\[\#0B1120\]\/50 span,
+html.light .h-10.bg-\[\#0B1120\]\/50 a {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+html.light .h-10.bg-\[\#0B1120\]\/50 a:hover {
+  color: #0F172A !important;
+}
+
+html.light .h-10.bg-\[\#0B1120\]\/50 svg {
+  color: #475569 !important;
+}
+
+/* 9. Accent Colors & Badges (Vibrant High-Contrast Palette for Light Theme) */
+/* Brand Cyan/Indigo */
+html.light .text-cyan-400,
+html.light .text-cyan-300,
+html.light .text-cyan-500 {
+  color: #4338CA !important;
+}
+
+html.light [class*="bg-cyan-950"],
+html.light .bg-cyan-950,
+html.light .bg-cyan-950\/80,
+html.light .bg-cyan-950\/60,
+html.light .bg-cyan-500\/10,
+html.light .bg-cyan-500\/20,
+html.light .bg-cyan-400\/20 {
+  background-color: #EEF2FF !important;
+  border-color: #A5B4FC !important;
+  color: #4338CA !important;
+}
+
+/* Emerald / Success */
+html.light .text-emerald-400,
+html.light .text-emerald-300,
+html.light .text-emerald-500 {
+  color: #047857 !important;
+}
+
+html.light [class*="bg-emerald-950"],
+html.light .bg-emerald-950,
+html.light .bg-emerald-950\/80,
+html.light .bg-emerald-950\/60,
+html.light .bg-emerald-950\/40,
+html.light .bg-emerald-950\/20,
+html.light .bg-emerald-500\/10,
+html.light .bg-emerald-500\/20 {
+  background-color: #ECFDF5 !important;
+  border-color: #A7F3D0 !important;
+  color: #047857 !important;
+}
+
+/* Amber / Warning */
+html.light .text-amber-400,
+html.light .text-amber-300,
+html.light .text-amber-500 {
+  color: #B45309 !important;
+}
+
+html.light [class*="bg-amber-950"],
+html.light .bg-amber-950,
+html.light .bg-amber-950\/80,
+html.light .bg-amber-950\/60,
+html.light .bg-amber-950\/40,
+html.light .bg-amber-950\/20,
+html.light .bg-amber-500\/10,
+html.light .bg-amber-500\/20 {
+  background-color: #FFFBEB !important;
+  border-color: #FDE68A !important;
+  color: #B45309 !important;
+}
+
+/* Rose & Red / Danger */
+html.light .text-rose-400,
+html.light .text-rose-300,
+html.light .text-rose-500,
+html.light .text-red-400,
+html.light .text-red-300,
+html.light .text-red-500 {
+  color: #B91C1C !important;
+}
+
+html.light [class*="bg-rose-950"],
+html.light [class*="bg-red-950"],
+html.light .bg-rose-950,
+html.light .bg-rose-950\/80,
+html.light .bg-rose-950\/60,
+html.light .bg-rose-950\/40,
+html.light .bg-rose-950\/20,
+html.light .bg-red-950,
+html.light .bg-red-950\/80,
+html.light .bg-red-950\/60,
+html.light .bg-red-950\/40,
+html.light .bg-rose-500\/10,
+html.light .bg-rose-500\/20,
+html.light .bg-red-500\/10,
+html.light .bg-red-500\/20 {
+  background-color: #FEF2F2 !important;
+  border-color: #FECACA !important;
+  color: #B91C1C !important;
+}
+
+/* Blue */
+html.light .text-blue-400,
+html.light .text-blue-300,
+html.light .text-blue-500 {
+  color: #1D4ED8 !important;
+}
+
+html.light [class*="bg-blue-950"],
+html.light .bg-blue-500\/10,
+html.light .bg-blue-500\/20 {
+  background-color: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #1D4ED8 !important;
+}
+
+/* Teal */
+html.light .text-teal-400,
+html.light .text-teal-300,
+html.light .text-teal-500 {
+  color: #0F766E !important;
+}
+
+html.light [class*="bg-teal-950"],
+html.light .bg-teal-500\/10,
+html.light .bg-teal-500\/20 {
+  background-color: #F0FDFA !important;
+  border-color: #99F6E4 !important;
+  color: #0F766E !important;
+}
+
+/* Indigo */
+html.light .text-indigo-400,
+html.light .text-indigo-300,
+html.light .text-indigo-500 {
+  color: #4338CA !important;
+}
+
+html.light [class*="bg-indigo-950"],
+html.light .bg-indigo-500\/10,
+html.light .bg-indigo-500\/20 {
+  background-color: #EEF2FF !important;
+  border-color: #C7D2FE !important;
+  color: #4338CA !important;
+}
+
+/* Purple */
+html.light .text-purple-400,
+html.light .text-purple-300,
+html.light .text-purple-500 {
+  color: #6D28D9 !important;
+}
+
+html.light [class*="bg-purple-950"],
+html.light .bg-purple-500\/10,
+html.light .bg-purple-500\/20 {
+  background-color: #F5F3FF !important;
+  border-color: #DDD6FE !important;
+  color: #6D28D9 !important;
+}
+
+/* Sky */
+html.light .text-sky-400,
+html.light .text-sky-300 {
+  color: #0369A1 !important;
+}
+
+/* 10. Buttons, Controls & Dropdowns */
+html.light button[class*="bg-slate-900"],
+html.light button[class*="bg-slate-800"],
+html.light a[class*="bg-slate-800"],
+html.light .bg-slate-900.border-slate-800,
+html.light button.bg-slate-900\/90 {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(160, 172, 248, 0.5) !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+html.light button[class*="bg-slate-900"]:hover,
+html.light button[class*="bg-slate-800"]:hover,
+html.light a[class*="bg-slate-800"]:hover,
+html.light button.bg-slate-900\/90:hover {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: #6366F1 !important;
+  color: #0F172A !important;
+}
+
+/* 11. Form Fields */
+html.light input:not([type="checkbox"]):not([type="radio"]),
+html.light textarea,
+html.light select {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(160, 172, 248, 0.5) !important;
+  color: #0F172A !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  background-color: #FFFFFF !important;
+  border-color: #4F46E5 !important;
+  color: #0F172A !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #64748B !important;
+}
+
+html.light input:disabled {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+  color: #64748B !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Modal and dialog backdrops in light mode */
+html.light .fixed.inset-0.bg-black\/75,
+html.light .fixed.inset-0.bg-black\/80,
+html.light .fixed.inset-0.bg-black\/70 {
+  background-color: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Dropdowns & floating modals */
+html.light header .absolute.right-0.bg-\[\#0B1120\],
+html.light [class*="shadow-2xl"].bg-\[\#0B1120\],
+html.light .fixed [class*="bg-\[\#0B1120\]"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(160, 172, 248, 0.45) !important;
+  box-shadow: 0 20px 40px -10px rgba(30, 27, 75, 0.18) !important;
+  color: #0F172A !important;
+}
+
+/* 12. Finny AI Assistant Widget */
+html.light .finny-assistant-panel {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 20px 45px -10px rgba(30, 27, 75, 0.18) !important;
+}
+
+html.light .finny-assistant-panel .bg-gradient-to-r.from-\[\#0F172A\] {
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.95), rgba(224, 231, 255, 0.95)) !important;
+  border-bottom: 1px solid rgba(160, 172, 248, 0.35) !important;
+}
+
+html.light .finny-assistant-panel .bg-\[\#0B1120\] {
+  background: rgba(245, 248, 255, 0.9) !important;
+  border-color: rgba(160, 172, 248, 0.35) !important;
+}
+
+html.light .finny-assistant-panel .bg-\[\#070B14\]\/80,
+html.light .finny-assistant-panel .bg-\[\#070B14\]\/50 {
+  background: rgba(245, 247, 255, 0.6) !important;
+}
+
+html.light .finny-assistant-panel .bg-slate-900 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #0F172A !important;
+  border-color: rgba(160, 172, 248, 0.35) !important;
+}
+
+html.light .finny-assistant-panel button {
+  color: #1E293B !important;
+}
+
+html.light .finny-assistant-panel input {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: rgba(160, 172, 248, 0.5) !important;
+}
+
+/* 13. Tables */
+html.light thead tr,
+html.light thead.bg-slate-900 {
+  background: rgba(240, 244, 255, 0.85) !important;
+  border-color: rgba(160, 172, 248, 0.4) !important;
+}
+
+html.light th {
+  color: #1E293B !important;
+  font-weight: 700 !important;
+}
+
+html.light tbody tr:hover {
+  background: rgba(240, 244, 255, 0.5) !important;
+}
+
+html.light td {
+  border-bottom-color: rgba(160, 172, 248, 0.25) !important;
+  color: #0F172A !important;
+}
+
+html.light tbody.bg-slate-950\/30 {
+  background: transparent !important;
+}
+
+/* Table cells with specific colored status indicators */
+html.light td .text-cyan-300, html.light td.text-cyan-300 { color: #4338CA !important; font-weight: 600 !important; }
+html.light td .text-emerald-300, html.light td.text-emerald-300 { color: #047857 !important; font-weight: 600 !important; }
+html.light td .text-blue-300, html.light td.text-blue-300 { color: #1D4ED8 !important; font-weight: 600 !important; }
+html.light td .text-teal-300, html.light td.text-teal-300 { color: #0F766E !important; font-weight: 600 !important; }
+html.light td .text-slate-300, html.light td.text-slate-300 { color: #1E293B !important; font-weight: 600 !important; }
+html.light td .text-slate-400, html.light td.text-slate-400 { color: #334155 !important; }
+
+/* 14. Progress Bar Tracks, Code & Opacities */
+html.light .bg-slate-800.h-2,
+html.light .bg-slate-800.h-4,
+html.light .bg-slate-900.h-2,
+html.light [class*="h-1.5"] .bg-slate-800 {
+  background-color: rgba(190, 203, 235, 0.7) !important;
+}
+
+html.light code {
+  color: #4338CA !important;
+  background: rgba(238, 242, 255, 0.9) !important;
+  border: 1px solid rgba(160, 172, 248, 0.4) !important;
+  border-radius: 4px;
+  padding: 1px 4px;
+}
+
+html.light .opacity-40 {
+  opacity: 0.7 !important;
+}
+
+/* ==========================================================================
+   FINNY Theme Toggle Component (From finny-agent-ui visual specification)
+   ========================================================================== */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.08);
+  background: rgba(130, 110, 255, 0.15);
+}
+
+html.light .theme-toggle,
+body.light .theme-toggle {
+  border: 1px solid rgba(160, 172, 248, 0.7);
+  background: rgba(240, 244, 255, 0.85);
+  color: #4338CA;
+  box-shadow: 0 2px 8px rgba(100, 115, 220, 0.15);
+}
+
+html.light .theme-toggle:hover,
+body.light .theme-toggle:hover {
+  background: #D8E0FC;
+  border-color: #6366F1;
+}
+
+#themeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.5s ease;
+}
+
+/* ==========================================================================
+   FINNY Landing Page Light Mode Adaptations
+   ========================================================================== */
+html.light .finny-start-btn,
+body.light .finny-start-btn {
+  border: 1px solid rgba(160, 172, 248, 0.8) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #13142B !important;
+  box-shadow: 0 4px 16px rgba(100, 115, 220, 0.25);
+}
+
+html.light .finny-start-btn:hover,
+body.light .finny-start-btn:hover {
+  background: #ffffff !important;
+  border-color: #6366F1 !important;
+}
+
+html.light .brand-word,
+body.light .brand-word {
+  color: #13142B !important;
+  text-shadow: 0 2px 12px rgba(160, 172, 248, 0.4);
+}
+
+html.light .finny-header,
+body.light .finny-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+html.light .finny-header .logo,
+body.light .finny-header .logo {
+  color: #13142B !important;
+}
+
+html.light .finny-header .status,
+body.light .finny-header .status {
+  color: rgba(19, 20, 43, 0.7) !important;
+}
+
+html.light .finny-header .status-dot,
+body.light .finny-header .status-dot {
+  background: #10b981 !important;
+}
+
+html.light .bottom-text,
+body.light .bottom-text {
+  color: rgba(19, 20, 43, 0.5) !important;
+}
+
+html.light .intro .description,
+body.light .intro .description {
+  color: rgba(19, 20, 43, 0.75) !important;
+}
+
+html.light .intro .eyebrow,
+body.light .intro .eyebrow {
+  color: #4F46E5 !important;
+}
+
+html.light .finny-h1,
+body.light .finny-h1 {
+  color: #13142B !important;
+}
+
+html.light .finny-h1 span,
+body.light .finny-h1 span {
+  background: linear-gradient(90deg, #4338CA, #6366F1, #818CF8) !important;
+  background-size: 200% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+html.light .ambient-glow,
+body.light .ambient-glow {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(180, 192, 255, 0.3) 45%, transparent 70%) !important;
+}
+
+html.light .ai-core .core,
+body.light .ai-core .core {
+  background: radial-gradient(circle at 35% 30%, #ffffff, #dcd8ff 25%, #8c7eff 60%, #4f46e5 100%) !important;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.9), 0 0 70px rgba(140, 150, 255, 0.7), 0 0 120px rgba(110, 120, 255, 0.45) !important;
+}
+
+html.light .ai-core .orbit,
+body.light .ai-core .orbit {
+  border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+html.light .ai-core .core-glow,
+body.light .ai-core .core-glow {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(160, 175, 255, 0.4) 40%, transparent 70%) !important;
+}
