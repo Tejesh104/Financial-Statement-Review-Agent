@@ -29,6 +29,7 @@ ENV/
 .env.*
 .env.local
 .env.*.local
+!.env.example
 
 # Database
 *.sqlite

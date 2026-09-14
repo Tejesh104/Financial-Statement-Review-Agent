@@ -268,7 +268,7 @@ export const UploadPage = () => {
           }
         } else if (err.code === 'ECONNABORTED' || err.message?.includes('Network Error') || !err.response) {
           errorTitle = 'BACKEND UNAVAILABLE';
-          errorDetail = 'Backend API is not reachable at http://localhost:8001. Please verify that the backend server is running.';
+          errorDetail = 'Backend API is not reachable. Please verify that the backend server is running and accessible.';
         } else if (err.message) {
           errorDetail = err.message;
         }

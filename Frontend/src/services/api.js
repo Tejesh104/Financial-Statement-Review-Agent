@@ -12,7 +12,13 @@ const fallbackBase = (() => {
   return `${protocol}//${frontendHost}:8001/api/v1`;
 })();
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || fallbackBase;
+let baseApi = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || fallbackBase;
+if (typeof window !== 'undefined' && window.location && window.location.hostname && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+  if (baseApi.includes('localhost') || baseApi.includes('127.0.0.1')) {
+    baseApi = baseApi.replace('localhost', window.location.hostname).replace('127.0.0.1', window.location.hostname);
+  }
+}
+const API_BASE_URL = baseApi;
 
 const api = axios.create({
   baseURL: API_BASE_URL,

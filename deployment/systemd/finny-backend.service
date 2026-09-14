@@ -1,0 +1,26 @@
+[Unit]
+Description=FINNY Financial Statement Review Backend Service
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/finny/backend
+EnvironmentFile=/opt/finny/backend/.env
+ExecStart=/opt/finny/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001 --workers 2
+Restart=always
+RestartSec=5s
+
+# Security sandboxing
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=finny-backend
+
+[Install]
+WantedBy=multi-user.target
