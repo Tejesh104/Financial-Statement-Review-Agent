@@ -78,10 +78,10 @@ FINNY Dashboard (Risk Score, Financial Health, Anomalies, AI Review, Evidence)
 ### 1. Prerequisites
 - **Python:** 3.11+
 - **Node.js:** 18+
-- **Ollama:** Running locally with model `qwen2.5:7b`
+- **Ollama:** Running locally with model `qwen2.5:0.5b`
   ```bash
-  ollama pull qwen2.5:7b
-  ollama run qwen2.5:7b
+  ollama pull qwen2.5:0.5b
+  ollama run qwen2.5:0.5b
   ```
 
 ### 2. Backend Setup
